@@ -12,7 +12,7 @@ class CentroDistribucion (val ciudad: Ciudad){
       return   vendedores.maxBy { c -> c.puntajeCertificaciones() }
     }
 
-    fun puedeCubri(ciudad : Ciudad) : Boolean{
+    fun puedeCubrir(ciudad : Ciudad) : Boolean{
         return vendedores.any { i -> i.puedeTrabajarEn(ciudad) }
     }
 
