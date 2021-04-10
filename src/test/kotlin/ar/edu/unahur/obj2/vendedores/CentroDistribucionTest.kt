@@ -19,6 +19,11 @@ class CentroDistribucionTest : DescribeSpec({
         centroDistribucion.agregarVendedor(vendedorFijo)
       }
 
+
+      it("agregar vendedor") {
+        centroDistribucion.agregarVendedor(vendedorFijo).toString()
+      }
+
       it("vendedorEstrella"){
         centroDistribucion.vendedorEstrella()
       }
