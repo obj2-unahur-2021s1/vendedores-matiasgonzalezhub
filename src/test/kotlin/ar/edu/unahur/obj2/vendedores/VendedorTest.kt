@@ -19,13 +19,21 @@ class VendedorTest : DescribeSpec({
       it("otra ciudad") {
         vendedorFijo.puedeTrabajarEn(sanIgnacio).shouldBeFalse()
       }
+
+      it("es influyente")
+      {
+        vendedorFijo.esInfluyente().shouldBeFalse()
+      }
+
+
     }
   }
 
   describe("Viajante") {
-    val cordoba = Provincia(2000000)
+    val cordoba = Provincia(20000000)
     val villaDolores = Ciudad(cordoba)
     val viajante = Viajante(listOf(misiones))
+    val viajanteCordoba = Viajante(listOf(cordoba))
 
     describe("puedeTrabajarEn") {
       it("una ciudad que pertenece a una provincia habilitada") {
@@ -33,6 +41,36 @@ class VendedorTest : DescribeSpec({
       }
       it("una ciudad que no pertenece a una provincia habilitada") {
         viajante.puedeTrabajarEn(villaDolores).shouldBeFalse()
+      }
+      it("es influyente misiones")
+      {
+        viajante.esInfluyente().shouldBeFalse()
+      }
+
+      it("es influyente")
+      {
+        viajanteCordoba.esInfluyente().shouldBeTrue()
+      }
+
+    }
+  }
+
+  describe("ComercioCorresponsal") {
+    val cordoba = Provincia(20000000)
+    val villaDolores = Ciudad(cordoba)
+    val comercioCorresponsal = ComercioCorresponsal(listOf(villaDolores))
+
+
+    describe("puedeTrabajarEn") {
+      it("una ciudad que pertenece a una provincia habilitada") {
+        comercioCorresponsal.puedeTrabajarEn(sanIgnacio).shouldBeFalse()
+      }
+      it("una ciudad que no pertenece a una provincia habilitada") {
+        comercioCorresponsal.puedeTrabajarEn(villaDolores).shouldBeTrue()
+      }
+      it("es influyente")
+      {
+        comercioCorresponsal.esInfluyente().shouldBeFalse()
       }
     }
   }
