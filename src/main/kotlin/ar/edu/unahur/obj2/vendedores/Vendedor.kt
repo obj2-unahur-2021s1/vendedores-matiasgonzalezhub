@@ -1,5 +1,7 @@
 package ar.edu.unahur.obj2.vendedores
 
+import com.sun.org.apache.xpath.internal.operations.Bool
+
 class Certificacion(val esDeProducto: Boolean, val puntaje: Int)
 
 abstract class Vendedor {
@@ -36,6 +38,11 @@ abstract class Vendedor {
 
   //devuelve Boolean quien la implemente
   abstract fun esInfluyente(): Boolean
+
+  fun esGenerico(): Boolean
+  {
+    return this.otrasCertificaciones() >= 1
+  }
 }
 
 // En los parámetros, es obligatorio poner el tipo
@@ -49,6 +56,8 @@ class VendedorFijo(val ciudadOrigen: Ciudad) : Vendedor() {
   //devuelve Boolean
   override fun esInfluyente(): Boolean
   { return false }
+
+
 }
 
 // A este tipo de List no se le pueden agregar elementos una vez definida
@@ -80,16 +89,19 @@ class ComercioCorresponsal(val ciudades: List<Ciudad>) : Vendedor() {
   }
 
   //devuelve Boolean
-  fun tieneAlMenosTresProvincias() : Boolean
-  {
-    var tieneCiudades = mutableListOf<Ciudad>()
+  //fun tieneAlMenosTresProvincias() : Boolean
+  //{
+  //  var ciudadesUnicas = mutableListOf<Ciudad>()
+//
+  //  for (ciudade in ciudades) {
+  //    if ( !ciudadesUnicas.contains(ciudade) )
+  //    {
+  //      ciudadesUnicas.add(ciudade)
+  //    }
+  //  }
+  // return ciudadesUnicas.size > 3
+  //}
+  fun tieneAlMenosTresProvincias() = provinciasConSucursal().size >= 3
 
-    for (ciudade in ciudades) {
-      if ( !tieneCiudades.contains(ciudade) )
-      {
-        tieneCiudades.add(ciudade)
-      }
-    }
-   return tieneCiudades.size > 3
-  }
+  fun provinciasConSucursal() = ciudades.distinctBy { it.provincia }
 }

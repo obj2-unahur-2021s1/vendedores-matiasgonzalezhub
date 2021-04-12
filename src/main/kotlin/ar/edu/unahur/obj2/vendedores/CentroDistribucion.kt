@@ -26,16 +26,17 @@ class CentroDistribucion (val ciudad: Ciudad){
     //devuelve lista de vendedores
     fun vendedoresGenericos() : List<Vendedor>
     {
-        return vendedores.filter { c -> c.otrasCertificaciones() == 1 }
+       // return vendedores.filter { c -> c.otrasCertificaciones() == 1 }
+        return vendedores.filter { i -> i.esGenerico() }
     }
 
     //devuelve Boolean
     fun esRobusto() : Boolean {
 
-        var vendedoresFirmes = mutableListOf<Vendedor>()
+      //  var vendedoresFirmes: MutableList<Vendedor> = vendedores.filter { c: Vendedor -> c.esFirme() }.toMutableList()
+//
+      //  return vendedoresFirmes.size >= 3
 
-        vendedoresFirmes = vendedores.filter { c: Vendedor -> c.esFirme() }.toMutableList()
-
-        return vendedoresFirmes.size >= 3
+        return vendedores.count{ i -> i.esFirme()} >= 3
     }
 }
