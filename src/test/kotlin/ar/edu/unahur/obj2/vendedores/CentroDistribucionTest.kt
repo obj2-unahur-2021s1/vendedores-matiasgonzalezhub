@@ -4,6 +4,7 @@ import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.types.shouldBeInstanceOf
 import io.kotest.matchers.types.shouldBeSameInstanceAs
 
 class CentroDistribucionTest : DescribeSpec({
@@ -22,13 +23,15 @@ class CentroDistribucionTest : DescribeSpec({
     describe("puedeTrabajarEn") {
 
       it("agregar vendedor") {
+        println(centroDistribucion.vendedores.size.toString())
         centroDistribucion.agregarVendedor(vendedorFijoCordoba)
+        centroDistribucion.vendedores.count().shouldBe(1)
       }
 
 
-      it("agregar vendedor existente") {
-          centroDistribucion.agregarVendedor(vendedorFijo)
-      }
+    //  it("agregar vendedor existente") {
+    //      centroDistribucion.agregarVendedor(vendedorFijo)
+    //  }
 
       it("vendedor Estrella"){
         centroDistribucion.vendedorEstrella()

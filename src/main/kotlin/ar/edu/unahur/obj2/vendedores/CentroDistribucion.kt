@@ -7,7 +7,8 @@ class CentroDistribucion (val ciudad: Ciudad){
     //devuelve nada
     fun agregarVendedor(vendedor : Vendedor){
 
-        check(vendedores.contains(vendedor)) {
+      //  check(vendedores.contains(vendedor)) {
+        check(vendedores.size == 0 || vendedores.contains(vendedor)) {
             "Vendedor ya existente"
         }
         vendedores.add(vendedor)
